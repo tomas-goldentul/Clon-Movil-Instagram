@@ -1,17 +1,27 @@
+import React from 'react';
+import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Publicacion from './src/components/publicacion'; 
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import StoriesContainer from './src/components/historiasContainer'; 
 import PublicacionDetail from './src/components/publicacionDetail'; 
+import Footer from './src/components/Footer'; 
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Publicacion" component={Publicacion} />
-        <Stack.Screen name="PublicacionDetail" component={PublicacionDetail} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Home" component={StoriesContainer} />
+          <Stack.Screen name="PublicacionDetail" component={PublicacionDetail} /> 
+        </Stack.Navigator>
+      </NavigationContainer>
+      <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}>
+        <Footer />
+      </View>
+    </SafeAreaProvider>
   );
 }
