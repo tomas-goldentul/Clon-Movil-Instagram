@@ -1,19 +1,15 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, Pressable, FlatList, SafeAreaView} from 'react-native';
-import api from '../services/api.js'
-import PublicacionDetail from '../components/publicacionDetail.js'; 
+import { StyleSheet, Text, View, Image, Pressable, FlatList, SafeAreaView } from 'react-native';
+import api from '../services/api.js';
 
-function Publicacion() {
+function Publicacion({ navigation }) {
     const [gatos, setGatos] = useState([]);
-    const [gatoSeleccionado, setGatoSeleccionado] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function obtenerGatos() {
             try {
-                const response = await api.get(
-                    'images/search?limit=12&has_breeds=1'
-                );
+                const response = await api.get('images/search?limit=12&has_breeds=1');
                 setGatos(response.data);
             } catch (error) {
                 console.error(error);
@@ -21,65 +17,62 @@ function Publicacion() {
                 setLoading(false);
             }
         }
-
         obtenerGatos();
     }, []);
 
-    const handleBack = () => {
-        setGatoSeleccionado(null);
-    };
-
-    if (gatoSeleccionado) {
-        return (
-            <SafeAreaView style={styles.container}>
-               
-                <Pressable style={styles.btnVolver} onPress={handleBack}>
-                    <Text style={styles.btnVolverText}>Volver</Text>
-                </Pressable>
-                <PublicacionDetail
-                    imagen={gatoSeleccionado.url}
-                    breeds={gatoSeleccionado.breeds}
-                    id={gatoSeleccionado.id}
-                />
-            </SafeAreaView>
-        );
-    }
-
-    // VISTA DE CARGA
-   // if (loading) {
-  //      return <Loader />;
-    //}
-
-    // VISTA PRINCIPAL (GALERÍA)
     return (
         <SafeAreaView style={styles.container}>
-            {/* Las cadenas de texto SIEMPRE van dentro de un componente <Text> */}
-            <Text style={styles.titulo}>Trending</Text>
-            
-            {/* 2. Cambiamos el .map() por un FlatList (Mucho mejor rendimiento en celulares) */}
             <FlatList
                 data={gatos}
                 keyExtractor={(gato) => gato.id.toString()}
-                numColumns={2} // Mantiene el diseño de galería/grilla de 2 columnas
-                columnWrapperStyle={styles.fila}
                 contentContainerStyle={styles.galeria}
                 renderItem={({ item: gato }) => (
-                    <View style={styles.card}>
-                        {/* 3. Las imágenes de internet SIEMPRE llevan source={{ uri: ... }} y ancho/alto fijo */}
-                        <Image
-                            style={styles.fotoGato}
-                            source={{ uri: gato.url }}
-                        />
-                        <View style={styles.footerPost}>
-                            {/* 4. Las imágenes locales se importan y se pasan directo */}
-                            
-                            <Pressable 
-                                style={styles.btnDetalle} 
-                                onPress={() => setGatoSeleccionado(gato)}
-                            >
-                                <Text style={styles.btnDetalleText}>Ver detalle</Text>
-                            </Pressable>
+                    <View style={styles.post}>
+                        <View style={styles.headerPost}>
+                            <View style={styles.userInfo}>
+                                <View style={styles.profilePicContainer}>
+                                    <Image source={require('../../assets/perfil.png')} style={styles.icon} />
+                                </View>
+                                <View style={styles.userNameLoc}>
+                                    <Text style={styles.userName}>joshua_l</Text>
+                                    <Text style={styles.location}>Cat Cafe, Tokyo</Text>
+                                </View>
+                            </View>
+                            <Text style={styles.options}>...</Text>
                         </View>
+
+                        <Image style={styles.fotoGato} source={{ uri: gato.url }} />
+
+                        <View style={styles.toolbar}>
+                            <View style={styles.toolbarLeft}>
+                                <Image source={require('../../assets/instagram-heart-icon.png')} style={styles.icon} />
+                                <Image source={require('../../assets/instagram-comment-icon.png')} style={styles.icon} />
+                                <Image source={require('../../assets/instagram-share-icon.png')} style={styles.icon} />
+                            </View>
+                            <Image source={require('../../assets/instagram-save-icon.png')} style={styles.iconRight} />
+                        </View>
+
+                        <View style={styles.likesSection}>
+                            <View style={styles.miniProfilePic}>
+                            </View>
+                            <Text style={styles.likesText}>Liked by <Text style={styles.boldText}>MiauFan123</Text> and <Text style={styles.boldText}>45,686</Text> others</Text>
+                        </View>
+
+                        <View style={styles.captionSection}>
+                            <Text style={styles.captionText}>
+                                <Text style={styles.boldText}>pastelDePapa777</Text> Me gustan más los perros
+                            </Text>
+                        </View>
+
+                        <Pressable
+                            style={styles.btnDetalleLink}
+                            onPress={() => navigation.navigate('PublicacionDetail', {
+                                imagen: gato.url,
+                                breeds: gato.breeds,
+                                id: gato.id
+                            })}>
+                            <Text style={styles.btnDetalleLinkText}>Ver más detalles...</Text>
+                        </Pressable>
                     </View>
                 )}
             />
@@ -87,7 +80,6 @@ function Publicacion() {
     );
 }
 
-// 5. Reemplazo de publicacion.css por StyleSheet de React Native
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -101,63 +93,120 @@ const styles = StyleSheet.create({
         color: '#000',
     },
     galeria: {
-        paddingHorizontal: 8,
+        paddingHorizontal: 0,
+        paddingBottom: 16,
     },
-    fila: {
-        justifyContent: 'space-between',
-    },
-    card: {
+    post: {
         flex: 1,
-        margin: 8,
+        marginBottom: 20,
         backgroundColor: '#fff',
-        borderRadius: 12,
-        overflow: 'hidden',
-        borderWidth: 1,
-        borderColor: '#efefef',
-        // Sombras para iOS y Android
-        elevation: 3,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
     },
     fotoGato: {
         width: '100%',
-        height: 160,
+        height: 400,
+        resizeMode: 'cover',
     },
-    footerPost: {
-        flexDirection: 'row', // En RN por defecto es 'column', acá lo hacemos fila.
-        alignItems: 'center',
+    headerPost: {
+        flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: 10,
-    },
-    fotoPerfil: {
-        width: 30,
-        height: 30,
-        borderRadius: 15, // Círculo perfecto
-    },
-    btnVolver: {
+        alignItems: 'center',
+        paddingHorizontal: 12,
         paddingVertical: 8,
-        paddingHorizontal: 16,
-        backgroundColor: '#f0f0f0',
-        alignSelf: 'flex-start',
-        margin: 16,
-        borderRadius: 8,
     },
-    btnVolverText: {
-        fontWeight: '600',
-        color: '#333',
+    userInfo: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
-    btnDetalle: {
-        backgroundColor: '#0095f6', // Azul Instagram clásico
-        paddingVertical: 6,
-        paddingHorizontal: 10,
-        borderRadius: 6,
+    profilePicContainer: {
+        width: 32,
+        height: 32,
+        borderRadius: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 8,
     },
-    btnDetalleText: {
-        color: '#fff',
-        fontSize: 12,
+    profilePicText: {
+        fontSize: 18,
+    },
+    userNameLoc: {
+        justifyContent: 'center',
+    },
+    userName: {
+        fontSize: 14,
         fontWeight: 'bold',
+        color: '#000',
+    },
+    location: {
+        fontSize: 12,
+        color: '#8e8e8e',
+    },
+    options: {
+        fontSize: 20,
+        color: '#000',
+        marginRight: 4,
+    },
+    toolbar: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 14,
+        paddingVertical: 10,
+    },
+    toolbarLeft: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    icon: {
+        width: 24,
+        height: 24,
+        marginRight: 16,
+        resizeMode: 'contain',
+    },
+    iconRight: {
+        width: 24,
+        height: 24,
+        resizeMode: 'contain',
+    },
+    likesSection: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 12,
+        paddingBottom: 4,
+    },
+    miniProfilePic: {
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 6,
+    },
+    miniProfilePicText: {
+        fontSize: 10,
+    },
+    likesText: {
+        fontSize: 12,
+        color: '#000',
+    },
+    captionSection: {
+        paddingHorizontal: 12,
+        paddingBottom: 4,
+    },
+    captionText: {
+        fontSize: 14,
+        color: '#000',
+        lineHeight: 18,
+    },
+    boldText: {
+        fontWeight: 'bold',
+    },
+    btnDetalleLink: {
+        paddingHorizontal: 12,
+        paddingBottom: 8,
+    },
+    btnDetalleLinkText: {
+        fontSize: 12,
+        color: '#8e8e8e',
     },
 });
 
