@@ -65,7 +65,7 @@ function PublicacionDetail({ route, navigation }) {
 
                 <View style={styles.captionSection}>
                     <Text style={styles.captionText}>
-                        <Text style={styles.boldText}>joshua_l</Text> Descubriendo al hermoso <Text style={styles.boldText}>{raza.name || 'Michi'}</Text> (ID: {id}). {raza.description}
+                        <Text style={styles.boldText}>joshua_l</Text> <Text>{raza.name }</Text> (ID: {id}) {raza.description}
                     </Text>
                 </View>
 
@@ -96,50 +96,159 @@ function PublicacionDetail({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#fff' },
-    detail: { flex: 1 },
-    scrollContent: { paddingBottom: 30 },
-    headerPost: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 10 },
-    userInfo: { flexDirection: 'row', alignItems: 'center' },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  detail: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingBottom: 30,
+  },
+  headerPost: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+  userInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 
-    // estilo boton volver atras [gemini]
-    btnVolver: {
-        paddingRight: 12,
-        paddingLeft: 4,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    btnVolverText: {
-        fontSize: 34,
-        fontWeight: '300',
-        color: '#000',
-        lineHeight: 34,
-    },
+  // estilo boton volver atras [gemini]
+  btnVolver: {
+    paddingRight: 12,
+    paddingLeft: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  btnVolverText: {
+    fontSize: 34,
+    fontWeight: '300',
+    color: '#000',
+    lineHeight: 34,
+  },
 
-    profilePicContainer:
-        { width: 36, height: 36, borderRadius: 18, overflow: 'hidden', marginRight: 10 },
-    avatar: { width: '100%', height: '100%', resizeMode: 'cover' },
-    userNameLoc: { justifyContent: 'center' },
-    userName: { fontSize: 14, fontWeight: 'bold', color: '#000' },
-    location: { fontSize: 12, color: '#8e8e8e' },
-    options: { fontSize: 20, color: '#000', marginRight: 4 },
-    fotoGato: { width: '100%', height: 420, resizeMode: 'cover' },
-    toolbar: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 14, paddingVertical: 12 },
-    toolbarLeft: { flexDirection: 'row', alignItems: 'center' },
-    icon: { width: 24, height: 24, marginRight: 16, resizeMode: 'contain' },
-    iconLiked: { tintColor: '#ff3b30' },
-    iconRight: { width: 24, height: 24, resizeMode: 'contain' },
-    likesSection: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 14, paddingBottom: 6 },
-    miniProfilePic: { width: 20, height: 20, borderRadius: 10, backgroundColor: '#efefef', justifyContent: 'center', alignItems: 'center', marginRight: 6 },
-    miniProfilePicText: { fontSize: 10 },
-    likesText: { fontSize: 13, color: '#000' },
-    captionSection: { paddingHorizontal: 14, paddingBottom: 8 },
-    captionText: { fontSize: 14, color: '#000', lineHeight: 19 },
-    detallesEspecificos: { marginHorizontal: 14, padding: 12, backgroundColor: '#f9f9f9', borderRadius: 8, marginBottom: 14 },
-    detalleItemText: { fontSize: 13, color: '#262626', marginBottom: 4, lineHeight: 16 },
-    comentariosContainer: { paddingHorizontal: 14, paddingTop: 8, borderTopWidth: 0.5, borderTopColor: '#efefef' },
-    comentario: { fontSize: 13, lineHeight: 18, marginBottom: 6, color: '#000' },
-    boldText: { fontWeight: 'bold' },
+  profilePicContainer: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    overflow: 'hidden',
+    marginRight: 10,
+  },
+  avatar: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  userNameLoc: {
+    justifyContent: 'center',
+  },
+  userName: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+  location: {
+    fontSize: 12,
+    color: '#8e8e8e',
+  },
+  options: {
+    fontSize: 20,
+    color: '#000',
+    marginRight: 4,
+  },
+  fotoGato: {
+    width: '100%',
+    height: 420,
+    resizeMode: 'cover',
+  },
+  toolbar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+  },
+  toolbarLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    marginRight: 16,
+    resizeMode: 'contain',
+  },
+  iconLiked: {
+    tintColor: '#ff3b30',
+  },
+  iconRight: {
+    width: 24,
+    height: 24,
+    resizeMode: 'contain',
+  },
+  likesSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 14,
+    paddingBottom: 6,
+  },
+  miniProfilePic: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#efefef',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 6,
+  },
+  miniProfilePicText: {
+    fontSize: 10,
+  },
+  likesText: {
+    fontSize: 13,
+    color: '#000',
+  },
+  captionSection: {
+    paddingHorizontal: 14,
+    paddingBottom: 8,
+  },
+  captionText: {
+    fontSize: 14,
+    color: '#000',
+    lineHeight: 19,
+  },
+  detallesEspecificos: {
+    marginHorizontal: 14,
+    padding: 12,
+    backgroundColor: '#f9f9f9',
+    borderRadius: 8,
+    marginBottom: 14,
+  },
+  detalleItemText: {
+    fontSize: 13,
+    color: '#262626',
+    marginBottom: 4,
+    lineHeight: 16,
+  },
+  comentariosContainer: {
+    paddingHorizontal: 14,
+    paddingTop: 8,
+    borderTopWidth: 0.5,
+    borderTopColor: '#efefef',
+  },
+  comentario: {
+    fontSize: 13,
+    lineHeight: 18,
+    marginBottom: 6,
+    color: '#000',
+  },
+  boldText: {
+    fontWeight: 'bold',
+  },
 });
-
 export default PublicacionDetail;

@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     },
     fotoGato: {
         width: '100%',
-        height: 400,
+        height: 280,
         resizeMode: 'cover',
     },
     headerPost: {

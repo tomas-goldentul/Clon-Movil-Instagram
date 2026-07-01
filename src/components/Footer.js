@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, TouchableOpacity, Image, StyleSheet, SafeAreaView } from 'react-native';
 import { Feather, Foundation } from '@expo/vector-icons';
-
+import { useNavigation } from '@react-navigation/native';
 const Footer = () => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.footerContainer}>
@@ -23,7 +24,7 @@ const Footer = () => {
           <Feather name="heart" size={26} color="#FFFFFF" />
         </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={0.7} style={styles.profileButton}>
+        <TouchableOpacity onPress={() => navigation.navigate('Perfil')}  activeOpacity={0.7} >
           <Image
             source={{ uri: 'https://randomuser.me/api/portraits/men/1.jpg' }}
             style={styles.profileImage}
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   profileButton: {
-    padding: 5, 
+    padding: 5,
   },
   profileImage: {
     width: 28,

@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
 
 const STORIES_DATA = [
-    { id: '1', name: 'Tu historia', image: require('../../assets/perfil.png'), isUser: true },
+    { id: '1', name: 'Tu historia', image: require('../../assets/perfil.png') },
     { id: '2', name: 'michi_fan', image: { uri: 'https://cdn2.thecatapi.com/images/uUGt0UBzF.jpg' } },
-    { id: '3', name: 'catlover_ok', image: { uri: 'https://cdn2.thecatapi.com/images/0XYvN1wHz.jpg' } },
+    { id: '3', name: 'catlover_ok', image: { uri: 'https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg' } },
     { id: '4', name: 'pastelDePapa', image: { uri: 'https://cdn2.thecatapi.com/images/asv.jpg' } },
-    { id: '5', name: 'gat', image: { uri: 'https://cdn2.thecatapi.com/images/MTY3MDU3MQ.jpg' } },
+    { id: '5', name: 'gat', image: { uri: 'https://cdn2.thecatapi.com/images/LSaDk6OjY.jpg' } },
 ];
 
 export default function Stories() {
