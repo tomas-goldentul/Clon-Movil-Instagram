@@ -13,7 +13,6 @@ export default function Perfil() {
 
     const ProfileHeader = () => (
         <View style={styles.pad}>
-            {/* CORREGIDO: Barra superior con distribución simétrica */}
             <View style={[styles.flexRow, styles.spaceBtn]}>
                 <View style={styles.flexRow}>
                     <TouchableOpacity
@@ -24,7 +23,6 @@ export default function Perfil() {
                     </TouchableOpacity>
                     <Text style={styles.txtBold}>📷 jacob_w</Text>
                 </View>
-                {/* El menú ahora sí se posiciona correctamente a la derecha */}
                 <Text style={styles.menuIcon}>☰</Text>
             </View>
 
