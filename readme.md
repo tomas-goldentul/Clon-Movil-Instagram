@@ -31,4 +31,29 @@ Clon-Movil-Instagram/
 │   │   └── SplashScreen.js     
 │   └── services/               # Configuracion de los llamados a la API
 │       └── api.js              # Peticiones a la API
-└── App.js                      # Punto de inicio de la aplicación 
+└── App.js                      # Punto de inicio de la aplicación
+```
+
+## ⚙️ Funcionalidad de Componentes
+
+
+* **`Header.js`**
+  * **Funcionalidad:** Contiene accesos rápidos para cámara, televisión y mensajes.
+* **`Footer.js`**
+  * **Funcionalidad:** Contiene pestañas pestañas (Home, Search, Create, Heart, Profile).
+* **`Loading.js`**
+  * **Funcionalidad:** Recibe los props `color`, `tamaño` y `backgroundColor`, lo que permite usar el mismo componente en pantallas con fondos claros como oscuros.
+
+### 2. Componentes del Feed de Datos (`src/components/`)
+
+* **`Historia.js`**
+  * **Funcionalidad:** Tiene una lista `FlatList` que muestra las historias.
+* **`historiasContainer.js`**
+  * **Funcionalidad:** Ensambla de manera ordenada el `Header`, la sección de `Stories` y el feed dinámico de publicaciones en una sola vista unificada.
+* **`publicacion.js`**
+  * **Funcionalidad:** Se Conecta con la `api.js` para consumir datos de la API. Recibe la prop `navigation` desde publicacionDetail para poder ver en detalle la publicacion
+* **`publicacionDetail.js`**
+  * **Funcionalidad:** Vista expandida de una publicación específica, además simula de forma reactiva la interacción del botón "Like". Recibe la informacion de una publicacion  `publicacion.js`. Obtiene la `imagen`, el `id` y  `breeds`.
+
+* **`perfil.js`**
+  * **Funcionalidad:** Visualización del perfil, se pueden ver detalles de la cuenta (seguidores, seguidos, posts) y consume imágenes de la API.
