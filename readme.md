@@ -19,19 +19,24 @@ El desarrollo visual y estructural de la interfaz de usuario está basado en el 
 
 ```text
 Clon-Movil-Instagram/
-├── assets/                     # Imágenes de la aplicación 
-├── src/                        # Carpeta principal 
-│   ├── components/             # Componentes  reutilizables
-│   │   ├── Footer.js         
-│   │   ├── Header.js           
-│   │   ├── Historia.js        
+├── assets/                       # Imágenes de la aplicación
+├── src/                          # Carpeta principal
+│   ├── components/               # Componentes reutilizables
+│   │   ├── Footer.js
+│   │   ├── Header.js
+│   │   ├── Historia.js
 │   │   ├── historiasContainer.js
-│   │   ├── Loading.js         
-│   │   ├── perfil.js         
-│   │   └── SplashScreen.js     
-│   └── services/               # Configuracion de los llamados a la API
-│       └── api.js              # Peticiones a la API
-└── App.js                      # Punto de inicio de la aplicación
+│   │   ├── Loading.js
+│   │   ├── perfil.js
+│   │   ├── PostCard.js
+│   │   ├── publicacion.js
+│   │   ├── publicacionDetail.js
+│   │   └── SplashScreen.js
+│   ├── navigation/                # Configuración de rutas
+│   │   └── AppNavigator.js
+│   └── services/                  # Configuración de los llamados a la API
+│       └── api.js                 # Peticiones a la API
+└── App.js                         # Punto de inicio de la aplicación
 ```
 
 ## ⚙️ Funcionalidad de Componentes
