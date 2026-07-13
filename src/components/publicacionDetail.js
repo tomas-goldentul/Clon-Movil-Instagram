@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Image, Pressable, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context'; 
 
 function PublicacionDetail({ route, navigation }) {
     const { imagen, breeds, id } = route.params;
@@ -117,8 +118,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-
-  // estilo boton volver atras [gemini]
   btnVolver: {
     paddingRight: 12,
     paddingLeft: 4,
@@ -131,7 +130,6 @@ const styles = StyleSheet.create({
     color: '#000',
     lineHeight: 34,
   },
-
   profilePicContainer: {
     width: 36,
     height: 36,
@@ -251,4 +249,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
 export default PublicacionDetail;

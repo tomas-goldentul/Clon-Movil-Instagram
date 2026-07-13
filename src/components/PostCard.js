@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 
-// Componente modular reutilizable: recibe el post (gato) y la navegación por props
 const PostCard = ({ gato, navigation }) => {
   return (
     <View style={styles.post}>

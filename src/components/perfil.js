@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context'; 
 import api from '../services/api.js';
 import { useNavigation } from '@react-navigation/native';
 
 export default function Perfil() {
     const [fotosGatos, setFotosGatos] = useState([]);
     const navigation = useNavigation();
+
     useEffect(() => {
         api.get('images/search?limit=15')
             .then(response => setFotosGatos(response.data))
